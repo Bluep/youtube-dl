@@ -49,7 +49,10 @@ from .pornhub import PornHubIE
 from .xhamster import XHamsterEmbedIE
 from .tnaflix import TNAFlixNetworkEmbedIE
 from .vimeo import VimeoIE
-from .dailymotion import DailymotionCloudIE
+from .dailymotion import (
+    DailymotionIE,
+    DailymotionCloudIE,
+)
 from .onionstudios import OnionStudiosIE
 from .viewlift import ViewLiftEmbedIE
 from .screenwavemedia import ScreenwaveMediaIE
@@ -1295,6 +1298,21 @@ class GenericIE(InfoExtractor):
                 'uploader': 'cylus cyrus',
             },
         },
+        {
+            # video stored on custom kaltura server
+            'url': 'http://www.expansion.com/multimedia/videos.html?media=EQcM30NHIPv',
+            'md5': '537617d06e64dfed891fa1593c4b30cc',
+            'info_dict': {
+                'id': '0_1iotm5bh',
+                'ext': 'mp4',
+                'title': 'Elecciones británicas: 5 lecciones para Rajoy',
+                'description': 'md5:435a89d68b9760b92ce67ed227055f16',
+                'uploader_id': 'videos.expansion@el-mundo.net',
+                'upload_date': '20150429',
+                'timestamp': 1430303472,
+            },
+            'add_ie': ['Kaltura'],
+        },
     ]
 
     def report_following_redirect(self, new_url):
@@ -1658,12 +1676,9 @@ class GenericIE(InfoExtractor):
         if matches:
             return _playlist_from_matches(matches, lambda m: m[-1])
 
-        # Look for embedded Dailymotion player
-        matches = re.findall(
-            r'<(?:(?:embed|iframe)[^>]+?src=|input[^>]+id=[\'"]dmcloudUrlEmissionSelect[\'"][^>]+value=)(["\'])(?P<url>(?:https?:)?//(?:www\.)?dailymotion\.com/(?:embed|swf)/video/.+?)\1', webpage)
+        matches = DailymotionIE._extract_urls(webpage)
         if matches:
-            return _playlist_from_matches(
-                matches, lambda m: unescapeHTML(m[1]))
+            return _playlist_from_matches(matches)
 
         # Look for embedded Dailymotion playlist player (#3822)
         m = re.search(

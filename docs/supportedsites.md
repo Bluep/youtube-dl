@@ -283,6 +283,8 @@
  - **HotStar**
  - **Howcast**
  - **HowStuffWorks**
+ - **HRTi**
+ - **HRTiPlaylist**
  - **HuffPost**: Huffington Post
  - **Hypem**
  - **Iconosquare**
@@ -310,6 +312,7 @@
  - **jpopsuki.tv**
  - **JWPlatform**
  - **Kaltura**
+ - **Kamcord**
  - **KanalPlay**: Kanal 5/9/11 Play
  - **Kankan**
  - **Karaoketv**
@@ -329,7 +332,7 @@
  - **kuwo:mv**: 酷我音乐 - MV
  - **kuwo:singer**: 酷我音乐 - 歌手
  - **kuwo:song**: 酷我音乐
- - **la7.tv**
+ - **la7.it**
  - **Laola1Tv**
  - **Le**: 乐视网
  - **Learnr**
@@ -474,6 +477,8 @@
  - **Odnoklassniki**
  - **OktoberfestTV**
  - **on.aol.com**
+ - **onet.tv**
+ - **onet.tv:channel**
  - **OnionStudios**
  - **Ooyala**
  - **OoyalaExternal**
@@ -855,6 +860,7 @@
  - **youtube:search**: YouTube.com searches
  - **youtube:search:date**: YouTube.com searches, newest videos first
  - **youtube:search_url**: YouTube.com search URLs
+ - **youtube:shared**
  - **youtube:show**: YouTube.com (multi-season) shows
  - **youtube:subscriptions**: YouTube.com subscriptions feed, "ytsubs" keyword (requires authentication)
  - **youtube:user**: YouTube.com user videos (URL or "ytuser" keyword)

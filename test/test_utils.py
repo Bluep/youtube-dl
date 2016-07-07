@@ -33,6 +33,7 @@ from youtube_dl.utils import (
     ExtractorError,
     find_xpath_attr,
     fix_xml_ampersands,
+    get_element_by_class,
     InAdvancePagedList,
     intlist_to_bytes,
     is_html,
@@ -404,6 +405,12 @@ class TestUtil(unittest.TestCase):
         res_url, res_data = unsmuggle_url(url)
         self.assertEqual(res_url, url)
         self.assertEqual(res_data, None)
+
+        smug_url = smuggle_url(url, {'a': 'b'})
+        smug_smug_url = smuggle_url(smug_url, {'c': 'd'})
+        res_url, res_data = unsmuggle_url(smug_smug_url)
+        self.assertEqual(res_url, url)
+        self.assertEqual(res_data, {'a': 'b', 'c': 'd'})
 
     def test_shell_quote(self):
         args = ['ffmpeg', '-i', encodeFilename('ñ€ß\'.mp4')]
@@ -984,6 +991,14 @@ The first line
     def test_urshift(self):
         self.assertEqual(urshift(3, 1), 1)
         self.assertEqual(urshift(-3, 1), 2147483646)
+
+    def test_get_element_by_class(self):
+        html = '''
+            <span class="foo bar">nice</span>
+        '''
+
+        self.assertEqual(get_element_by_class('foo', html), 'nice')
+        self.assertEqual(get_element_by_class('no-such-class', html), None)
 
 if __name__ == '__main__':
     unittest.main()
